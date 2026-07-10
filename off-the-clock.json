@@ -1,14 +1,14 @@
 {
   "sky": [
-    { "file": "SC1", "caption": "Add a caption here" },
-    { "file": "SC2", "caption": "Add a caption here" },
-    { "file": "SC5", "caption": "Add a caption here" },
-    { "file": "EM6", "caption": "Add a caption here" },
-    { "file": "EM7", "caption": "Add a caption here" },
+    { "file": "SC1", "caption": "Pink Moment" },
+    { "file": "SC2", "caption": "Look, Rainbow!" },
+    { "file": "SC5", "caption": "\"Ich kann warten\"" },
+    { "file": "EM6", "caption": "Before Sunrise" },
+    { "file": "EM7", "caption": "Whispering Cheery Tree" },
     { "file": "EM8", "caption": "Add a caption here" },
-    { "file": "EM9", "caption": "Add a caption here" },
-    { "file": "EM10", "caption": "Add a caption here" },
-    { "file": "EM11", "caption": "Add a caption here" }
+    { "file": "EM9", "caption": "Plalette" },
+    { "file": "EM10", "caption": "Like Sunday, Like Rain" },
+    { "file": "EM11", "caption": "Full Moon" }
   ],
   "explore": [
     { "file": "EM3", "caption": "Boston Visiting" },
