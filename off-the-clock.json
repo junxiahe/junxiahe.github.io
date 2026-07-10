@@ -1,15 +1,15 @@
 {
   "sky": [
-    { "file": "SC1.JPG", "caption": "Add a caption here" },
-    { "file": "SC2.JPG", "caption": "Add a caption here" },
-    { "file": "SC3.JPG", "caption": "Add a caption here" },
-    { "file": "SC4.JPG", "caption": "Add a caption here" },
-    { "file": "SC5.JPG", "caption": "Add a caption here" }
+    { "file": "SC1", "caption": "Add a caption here" },
+    { "file": "SC2", "caption": "Add a caption here" },
+    { "file": "SC3", "caption": "Add a caption here" },
+    { "file": "SC4", "caption": "Add a caption here" },
+    { "file": "SC5", "caption": "Add a caption here" }
   ],
   "explore": [
-    { "file": "EM1.JPG", "caption": "Add a caption here" },
-    { "file": "EM2.JPG", "caption": "Add a caption here" },
-    { "file": "EM3.JPG", "caption": "Add a caption here" },
-    { "file": "EM4.JPG", "caption": "Add a caption here" }
+    { "file": "EM1", "caption": "Add a caption here" },
+    { "file": "EM2", "caption": "Add a caption here" },
+    { "file": "EM3", "caption": "Add a caption here" },
+    { "file": "EM4", "caption": "Add a caption here" }
   ]
 }

@@ -467,18 +467,45 @@
       document.getElementById('lightbox').classList.remove('open');
     }
 
+    const EXT_TRIES = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
+
+    function stripExt(name) {
+      return name.replace(/\.(jpe?g|png)$/i, '');
+    }
+
+    function imgWithFallback(base, caption) {
+      const alt = (caption || 'Photo').replace(/"/g, '&quot;');
+      const tries = JSON.stringify(EXT_TRIES.map(ext => `${base}.${ext}`));
+      return `<img src="${base}.${EXT_TRIES[0]}" alt="${alt}"
+        data-tries='${tries}' data-idx="0"
+        onerror="tryNextExt(this)">`;
+    }
+
+    function tryNextExt(img) {
+      const tries = JSON.parse(img.getAttribute('data-tries'));
+      let idx = parseInt(img.getAttribute('data-idx'), 10) + 1;
+      if (idx < tries.length) {
+        img.setAttribute('data-idx', idx);
+        img.src = tries[idx];
+      } else {
+        img.onerror = null;
+        img.style.display = 'none';
+      }
+    }
+
     function renderPolaroids(photos, containerId) {
       const container = document.getElementById(containerId);
       if (!container || !photos) return;
       const angles = [-4, 3, -2, 3, -3, 2, -3, 4, -2];
       container.innerHTML = photos.map((photo, i) => {
-        const src = photo.file;
+        const base = stripExt(photo.file);
         const caption = photo.caption || '';
         const angle = angles[i % angles.length];
+        const safeCaption = caption.replace(/'/g, "\\'");
         return `
           <div class="polaroid" style="transform: rotate(${angle}deg);"
-               onclick="openLightbox('${src}', '${caption.replace(/'/g, "\\'")}')">
-            <img src="${src}" alt="${caption || 'Photo'}">
+               onclick="openLightbox(document.querySelector('#${containerId} .polaroid:nth-child(${i + 1}) img').src, '${safeCaption}')">
+            ${imgWithFallback(base, caption)}
             <p class="polaroid-caption">${caption}</p>
           </div>`;
       }).join('');
@@ -491,7 +518,7 @@
         renderPolaroids(data.explore, 'explore-row');
       })
       .catch(err => {
-        console.log('Could not load photos.json', err);
+        console.log('Could not load off-the-clock.json', err);
       });
   </script>
 </body>
