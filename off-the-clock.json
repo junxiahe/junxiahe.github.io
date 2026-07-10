@@ -2,9 +2,13 @@
   "sky": [
     { "file": "SC1", "caption": "Add a caption here" },
     { "file": "SC2", "caption": "Add a caption here" },
-    { "file": "SC3", "caption": "Add a caption here" },
-    { "file": "SC4", "caption": "Add a caption here" },
-    { "file": "SC5", "caption": "Add a caption here" }
+    { "file": "SC5", "caption": "Add a caption here" },
+    { "file": "SC6", "caption": "Add a caption here" },
+    { "file": "SC7", "caption": "Add a caption here" },
+    { "file": "SC8", "caption": "Add a caption here" },
+    { "file": "SC9", "caption": "Add a caption here" },
+    { "file": "SC10", "caption": "Add a caption here" },
+    { "file": "SC11", "caption": "Add a caption here" }
   ],
   "explore": [
     { "file": "EM3", "caption": "Boston Visiting" },
