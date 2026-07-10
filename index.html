@@ -130,6 +130,8 @@
     margin: 32px 0 14px;
   }
   .panel h2:first-child { margin-top: 0; }
+  .panel ul:not(.list) { margin: 0 0 22px; padding-left: 20px; }
+  .panel ul:not(.list) li { margin-bottom: 10px; }
 
   .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
   .tag {
@@ -149,6 +151,24 @@
   }
   ul.list li:last-child { border-bottom: none; }
   .list .meta { color: var(--gray); font-size: 14px; }
+
+  .abstract-toggle {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--link);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 6px 0 0;
+  }
+  .abstract-text {
+    display: none;
+    margin-top: 10px !important;
+    font-size: 15px;
+    color: var(--gray);
+  }
+  .abstract-text.open { display: block; }
 
   .placeholder {
     background: var(--card);
@@ -176,7 +196,7 @@
     <div class="topbar-inner">
       <nav class="tabs">
         <button class="tab active" data-tab="about">About me</button>
-        <button class="tab" data-tab="pubs">Publications</button>
+        <button class="tab" data-tab="pubs">Research</button>
         <button class="tab" data-tab="teaching">Teaching</button>
         <a class="tab" href="CV.pdf" target="_blank" rel="noopener" style="text-decoration:none;">CV</a>
       </nav>
@@ -203,7 +223,7 @@
           <span class="at-symbol">@</span>
         </a>
         <a href="https://www.linkedin.com/in/junxia-he-11236726a/?skipRedirect=true" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener">
-          <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-341.7C24.42 106.3 0 82 0 51.9 0 21.9 24.4-.3 53.84-.3S107.7 21.9 107.7 51.9c0 30.1-24.15 54.4-53.86 54.4zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.29-79.3-48.29 0-55.7 37.7-55.7 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+          <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.7 37.7-55.7 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
         </a>
         <a href="https://scholar.google.com/citations?user=mhQY0gwAAAAJ&hl=en&oi=ao" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.909V17h2V9L12 3zm0 2.18L18.09 9 12 12.82 5.91 9 12 5.18zM12 15.09L5 11.18V14.5c0 1.657 3.134 3 7 3s7-1.343 7-3v-3.32l-7 3.91z"/></svg>
@@ -214,36 +234,41 @@
     <!-- About me -->
     <section id="about" class="panel active">
       <p>
-        Welcome, I'm Junxia, a Doctoral Researcher at the Department of Economics and Management,
-        University of Luxembourg, since April 2023. My PhD project examines the EU's Right to Repair
-        regulation and its impacts from an operations management perspective, looking at how mandated
-        reparability levels affect manufacturers, consumers, and social welfare.
+        Welcome, I'm Junxia, a PhD Candidate in Operations Management at the University of Luxembourg
+        under the supervision of <a href="https://scholar.google.com/citations?user=wzPj3ekAAAAJ&hl=en" target="_blank" rel="noopener">Prof. Benny Mantin</a>. I earned a B.A. in Accounting
+        (with a minor in CFA) from Nanjing Audit University (2017) and an M.S. in Management Science and
+        Engineering from Nanjing University of Finance and Economics (2021). Before starting my doctorate,
+        I gained research experience as a Research Assistant at the Nanjing University of Information
+        Science &amp; Technology (2021–2022).
       </p>
       <p>
-        I hold an M.S. in Management Science and Engineering from Nanjing University of Finance and
-        Economics (2021), focusing on operations strategy in e-retailing and omni-channel retailing, and a
-        B.A. in Accounting (with a minor in CFA) from Nanjing Audit University (2017). Before starting my
-        PhD, I worked as a Research Assistant at the School of Management Science and Engineering,
-        Nanjing University of Information Science &amp; Technology (2021–2022).
-      </p>
-      <p>
-        My research sits at the intersection of sustainable operations management, retail operations and
-        marketing, and game theory. Feel free to explore the site, and if you'd like to know more about my
-        work, you can also check out my <a href="CV.pdf" target="_blank" rel="noopener">CV</a>.
+        My research interest sits at the intersection of sustainable operations management, retail
+        operations and marketing, and game theory. My PhD project examines the EU's Right to Repair
+        regulation and its impacts from an operations management perspective. Feel free to explore the
+        site, and if you'd like to know more about my work, you can also check out my
+        <a href="CV.pdf" target="_blank" rel="noopener">CV</a>.
       </p>
     </section>
 
     <!-- Publications -->
     <section id="pubs" class="panel">
-      <h2>Research Interests</h2>
-      <div class="tags">
-        <span class="tag">Sustainable Operations Management</span>
-        <span class="tag">Right to Repair</span>
-        <span class="tag">Retail Operations &amp; Marketing</span>
-        <span class="tag">Consumer Behavior</span>
-        <span class="tag">Game Theory</span>
-        <span class="tag">Optimization</span>
-      </div>
+      <h2>Working Papers</h2>
+      <ul class="list">
+        <li>
+          J. He, B. Mantin (2025). The Right to Repair: On the Impact of Mandated Reparability Level.<br>
+          <button class="abstract-toggle" data-target="abstract-1">Abstract</button>
+          <p class="abstract-text placeholder" id="abstract-1">
+            [Paste the abstract for "The Right to Repair: On the Impact of Mandated Reparability Level" here.]
+          </p>
+        </li>
+        <li>
+          J. He, B. Mantin, J. Veldman (2026). A Right to Spare Part: Pricing and Regulation.<br>
+          <button class="abstract-toggle" data-target="abstract-2">Abstract</button>
+          <p class="abstract-text placeholder" id="abstract-2">
+            [Paste the abstract for "A Right to Spare Part: Pricing and Regulation" here.]
+          </p>
+        </li>
+      </ul>
 
       <h2>Publications</h2>
       <ul class="list">
@@ -275,19 +300,18 @@
 
     <!-- Teaching -->
     <section id="teaching" class="panel">
-      <h2>Teaching</h2>
       <ul class="list">
         <li>
-          Teaching Assistant — Inventory Management (Master course)<br>
-          <span class="meta">Winter Semester 2025, University of Luxembourg</span>
+          Inventory Management (Master course) — Teaching Assistant<br>
+          <span class="meta">Winter Semester 2025, University of Luxembourg · Prof. Joachim Arts</span>
         </li>
         <li>
-          Teaching — Supply Chain Management: Demand Forecasting (Bachelor course)<br>
+          Supply Chain Management (Bachelor course) — Co-lecturer<br>
           <span class="meta">Spring Semester 2025, University of Luxembourg</span>
         </li>
         <li>
-          Exams Invigilation — Bachelor and Master students<br>
-          <span class="meta">2023, 2024, 2025, University of Luxembourg</span>
+          Logistics and Supply Chain Management (Bachelor course) — Teaching Assistant<br>
+          <span class="meta">Spring Semester 2026, University of Luxembourg · Prof. Benny Mantin</span>
         </li>
       </ul>
     </section>
@@ -296,14 +320,16 @@
   </div>
 
   <script>
-    const tabs = document.querySelectorAll('.tab');
+    const tabs = document.querySelectorAll('.tab[data-tab]');
     const panels = document.querySelectorAll('.panel');
+    const profileHeader = document.querySelector('.profile');
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
         panels.forEach(p => p.classList.remove('active'));
         tab.classList.add('active');
         document.getElementById(tab.dataset.tab).classList.add('active');
+        profileHeader.style.display = tab.dataset.tab === 'about' ? '' : 'none';
       });
     });
 
@@ -312,6 +338,14 @@
       const html = document.documentElement;
       const isDark = html.getAttribute('data-theme') === 'dark';
       html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    });
+
+    document.querySelectorAll('.abstract-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.target);
+        target.classList.toggle('open');
+        btn.textContent = target.classList.contains('open') ? 'Hide abstract' : 'Abstract';
+      });
     });
   </script>
 </body>
