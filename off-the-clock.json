@@ -7,10 +7,10 @@
     { "file": "SC5", "caption": "Add a caption here" }
   ],
   "explore": [
-    { "file": "EM1", "caption": "Add a caption here" },
-    { "file": "EM2", "caption": "Add a caption here" },
-    { "file": "EM3", "caption": "Add a caption here" },
-    { "file": "EM4", "caption": "Add a caption here" },
+    { "file": "EM3", "caption": "Boston" },
+    { "file": "EM2", "caption": "Chinese Calligraphy (隶书)" },
+    { "file": "EM1", "caption": "Skatebording in an April Night" },
+    { "file": "EM4", "caption": "Capybara & Guitar" },
     { "file": "EM5", "caption": "Guitar without strings" }
   ]
 }
