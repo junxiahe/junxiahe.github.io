@@ -1,0 +1,14 @@
+{
+  "sky": [
+    { "file": "SC1.jpg", "caption": "Add a caption here" },
+    { "file": "SC2.jpg", "caption": "Add a caption here" },
+    { "file": "SC3.jpg", "caption": "Add a caption here" },
+    { "file": "SC4.jpg", "caption": "Add a caption here" }
+  ],
+  "explore": [
+    { "file": "EM1.jpg", "caption": "Add a caption here" },
+    { "file": "EM2.jpg", "caption": "Add a caption here" },
+    { "file": "EM3.jpg", "caption": "Add a caption here" },
+    { "file": "EM4.jpg", "caption": "Add a caption here" }
+  ]
+}
