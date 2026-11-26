@@ -1,13 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Junxia He</title>
-<meta name="description" content="Junxia He — academic personal page" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Junxia He — PhD Candidate in Operations Management</title>
+<meta name="description" content="Junxia He, PhD candidate in Operations Management at the University of Luxembourg. Research on the Right to Repair, sustainable operations, retail operations and game theory.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Junxia He">
+<meta property="og:description" content="PhD Candidate in Operations Management, University of Luxembourg">
+<meta property="og:image" content="profile.jpg">
+
+<!-- Apply saved / system theme before first paint (prevents a white flash in dark mode) -->
+<script>
+  (function () {
+    var t;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --bg: #ffffff;
@@ -25,24 +42,33 @@
     --link: #7fa4ff;
     --card: #1e2127;
   }
-  * { box-sizing: border-box; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.7;
-    transition: background 0.2s, color 0.2s;
+    transition: background-color .2s, color .2s;
   }
+  a { color: var(--link); }
+  :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
 
   /* ---- Top nav ---- */
   .topbar {
     position: sticky;
     top: 0;
+    z-index: 10;
     background: var(--bg);
     border-bottom: 1px solid var(--line);
-    z-index: 10;
   }
   .topbar-inner {
     max-width: 880px;
@@ -51,32 +77,38 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
   }
   .tabs {
     display: flex;
     gap: 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+  .tabs::-webkit-scrollbar { display: none; }
   .tab {
-    background: none;
-    border: none;
-    font-family: inherit;
     font-size: 17px;
     font-weight: 700;
     color: var(--gray);
-    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
     padding: 4px 0;
   }
-  .tab.active { color: var(--ink); }
+  .tab:hover, .tab[aria-current="page"] { color: var(--ink); }
+
   .icon-btn {
     background: none;
     border: none;
-    cursor: pointer;
-    color: var(--ink);
     padding: 4px;
+    color: var(--ink);
+    cursor: pointer;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
   }
-  .icon-actions { display: flex; gap: 14px; }
+  .icon-sun { display: none; }
+  [data-theme="dark"] .icon-moon { display: none; }
+  [data-theme="dark"] .icon-sun { display: block; }
 
   /* ---- Profile header ---- */
   .wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
@@ -84,226 +116,163 @@
   .photo {
     width: 132px;
     height: 132px;
-    border-radius: 50%;
     margin: 0 auto 24px;
-    background: var(--card);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 42px;
-    font-weight: 700;
-    color: var(--gray);
+    border-radius: 50%;
     overflow: hidden;
+    background: var(--card);
   }
-  .photo img { width: 100%; height: 100%; object-fit: cover; }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0 0 10px;
-  }
-  .role { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
-  .affil { font-size: 17px; color: var(--gray); margin: 0 0 4px; font-weight: 400; }
-  .dept { font-size: 17px; color: var(--gray); margin: 0 0 20px; font-weight: 400; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  h1 { font-size: 32px; font-weight: 700; margin: 0 0 10px; }
+  .role  { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+  .affil { font-size: 17px; color: var(--gray); margin: 0 0 4px; }
+  .dept  { font-size: 17px; color: var(--gray); margin: 0 0 20px; }
 
   .contact-row { display: flex; justify-content: center; align-items: center; gap: 14px; }
-  .contact-row a {
-    color: var(--ink);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .contact-row svg { width: 22px; height: 22px; fill: var(--ink); }
-  .contact-row .at-symbol { font-size: 22px; font-weight: 600; line-height: 1; }
+  .contact-row a { color: var(--ink); text-decoration: none; display: flex; }
+  .contact-row svg { width: 22px; height: 22px; fill: currentColor; }
+  .at-symbol { font-size: 22px; font-weight: 600; line-height: 1; }
 
   /* ---- Content panels ---- */
-  .panel { display: none; }
-  .panel.active { display: block; }
   .panel p { font-size: 17px; margin: 0 0 20px; }
-  .panel a { color: var(--link); text-decoration: underline; }
   .panel h2 {
     font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--gray);
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--gray);
     margin: 32px 0 14px;
   }
   .panel h2:first-child { margin-top: 0; }
-  .panel ul:not(.list) { margin: 0 0 22px; padding-left: 20px; }
-  .panel ul:not(.list) li { margin-bottom: 10px; }
-
-  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-  .tag {
-    font-size: 13px;
-    font-weight: 500;
-    padding: 6px 12px;
-    border-radius: 20px;
-    background: var(--card);
-    color: var(--ink);
-  }
 
   ul.list { list-style: none; padding: 0; margin: 0 0 20px; }
-  ul.list li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 16px;
-  }
+  ul.list li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
   ul.list li:last-child { border-bottom: none; }
-  .list .meta { color: var(--gray); font-size: 14px; }
+  .meta { color: var(--gray); font-size: 14px; }
 
-  .abstract-toggle {
-    background: none;
-    border: none;
-    font-family: inherit;
+  /* Abstracts: native <details>, no JS needed */
+  .abstract summary {
+    display: inline-block;
+    list-style: none;
+    padding-top: 6px;
     font-size: 15px;
     color: var(--link);
     text-decoration: underline;
     cursor: pointer;
-    padding: 6px 0 0;
   }
-  .abstract-text {
-    display: none;
-    margin-top: 10px !important;
-    font-size: 15px;
-    color: var(--gray);
-  }
-  .abstract-text.open { display: block; }
+  .abstract summary::-webkit-details-marker { display: none; }
+  .abstract .when-open { display: none; }
+  .abstract[open] .when-open { display: inline; }
+  .abstract[open] .when-closed { display: none; }
+  .panel .abstract p { margin: 10px 0 0; font-size: 15px; color: var(--gray); }
 
-  .placeholder {
-    background: var(--card);
-    border: 1px dashed #c9a227;
-    border-radius: 4px;
-    padding: 2px 6px;
-  }
-
-  footer {
-    margin-top: 64px;
-    font-size: 13px;
-    color: var(--gray);
-    text-align: center;
-  }
+  footer { margin-top: 64px; font-size: 13px; color: var(--gray); text-align: center; }
 
   /* ---- Off the Clock: polaroid gallery ---- */
-  .polaroid-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    margin: 8px 0 40px;
-  }
+  .polaroid-row { display: flex; flex-wrap: wrap; gap: 28px; margin: 8px 0 40px; }
   .polaroid {
+    --r: 0deg;
+    width: 160px;
+    padding: 10px 10px 18px;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 4px;
-    padding: 10px 10px 18px;
-    width: 160px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    font: inherit;
     cursor: pointer;
-    transition: transform 0.15s;
+    transform: rotate(var(--r));
+    transition: transform .15s;
   }
-  .polaroid:hover { transform: rotate(0deg) scale(1.04) !important; }
+  .polaroid:hover, .polaroid:focus-visible { transform: scale(1.04); }
   .polaroid img {
+    display: block;
     width: 100%;
     height: 130px;
     object-fit: cover;
     border-radius: 2px;
-    display: block;
-    background: var(--card);
+    background: #eee;
   }
-  .polaroid-caption {
-    font-size: 12px;
-    color: #555;
-    text-align: center;
-    margin: 8px 0 0;
-  }
+  .polaroid-caption { display: block; margin-top: 8px; font-size: 12px; color: #555; text-align: center; }
 
+  /* ---- Lightbox (native <dialog>: Esc to close, focus handled by browser) ---- */
   .lightbox {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.75);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    border: none;
+    background: transparent;
+    overflow: visible;
+    text-align: center;
     cursor: pointer;
   }
-  .lightbox.open { display: flex; }
-  .lightbox img {
-    max-width: 88vw;
-    max-height: 78vh;
-    border-radius: 4px;
-    cursor: default;
-  }
-  .lightbox-caption {
-    color: #fff;
-    font-size: 14px;
-    margin-top: 14px;
-  }
+  .lightbox::backdrop { background: rgba(0,0,0,.78); }
+  .lightbox img { display: block; max-width: 88vw; max-height: 78vh; margin: 0 auto; border-radius: 4px; }
+  .lightbox-caption { margin: 14px 0 0; color: #fff; font-size: 14px; }
   .lightbox-close {
-    position: absolute;
-    top: 24px;
-    right: 32px;
+    position: fixed;
+    top: 16px;
+    right: 24px;
+    background: none;
+    border: none;
     color: #fff;
-    font-size: 32px;
+    font-size: 36px;
+    line-height: 1;
     cursor: pointer;
   }
 
   @media (max-width: 560px) {
     .tabs { gap: 18px; }
     .tab { font-size: 15px; }
+    .wrap { padding-top: 40px; }
   }
 </style>
 </head>
 <body>
 
-  <div class="topbar">
+  <header class="topbar">
     <div class="topbar-inner">
-      <nav class="tabs">
-        <button class="tab active" data-tab="about">About me</button>
-        <button class="tab" data-tab="pubs">Research</button>
-        <button class="tab" data-tab="teaching">Teaching</button>
-        <a class="tab" href="CV.pdf" target="_blank" rel="noopener" style="text-decoration:none;">CV</a>
-        <button class="tab" data-tab="offclock">Off the Clock</button>
+      <nav class="tabs" aria-label="Main">
+        <a class="tab" href="#about" data-tab="about">About me</a>
+        <a class="tab" href="#research" data-tab="research">Research</a>
+        <a class="tab" href="#teaching" data-tab="teaching">Teaching</a>
+        <a class="tab" href="CV.pdf" target="_blank" rel="noopener">CV</a>
+        <a class="tab" href="#offclock" data-tab="offclock">Off the Clock</a>
       </nav>
-      <div class="icon-actions">
-        <button class="icon-btn" aria-label="Search" title="Search (Ctrl/Cmd+F)" onclick="window.print ? null : null">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </button>
-        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-      </div>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
     </div>
-  </div>
+  </header>
 
-  <div class="wrap">
-    <div class="profile">
-      <div class="photo"><img src="profile.jpg" alt="Junxia He"></div>
+  <main class="wrap">
+    <div class="profile" id="profile">
+      <div class="photo">
+        <img src="profile.jpg" alt="Junxia He" width="132" height="132" fetchpriority="high">
+      </div>
       <h1>Junxia He</h1>
       <p class="role">PhD Candidate in Operations Management</p>
       <p class="affil">University of Luxembourg</p>
       <p class="dept">Department of Economics and Management</p>
       <div class="contact-row">
         <a href="mailto:8221sunshine@gmail.com" aria-label="Email" title="Email">
-          <span class="at-symbol">@</span>
+          <span class="at-symbol" aria-hidden="true">@</span>
         </a>
-        <a href="https://www.linkedin.com/in/junxia-he-11236726a/?skipRedirect=true" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener">
-          <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.7 37.7-55.7 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+        <a href="https://www.linkedin.com/in/junxia-he-11236726a/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.7 37.7-55.7 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
         </a>
-        <a href="https://scholar.google.com/citations?user=mhQY0gwAAAAJ&hl=en&oi=ao" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.909V17h2V9L12 3zm0 2.18L18.09 9 12 12.82 5.91 9 12 5.18zM12 15.09L5 11.18V14.5c0 1.657 3.134 3 7 3s7-1.343 7-3v-3.32l-7 3.91z"/></svg>
+        <a href="https://scholar.google.com/citations?user=mhQY0gwAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L1 9l11 6 9-4.909V17h2V9L12 3zm0 2.18L18.09 9 12 12.82 5.91 9 12 5.18zM12 15.09L5 11.18V14.5c0 1.657 3.134 3 7 3s7-1.343 7-3v-3.32l-7 3.910z"/></svg>
         </a>
       </div>
     </div>
 
     <!-- About me -->
-    <section id="about" class="panel active">
+    <section id="panel-about" class="panel" aria-label="About me">
       <p>Hii, welcome to my website :)</p>
       <p>
         I'm Junxia, a PhD Candidate in Operations Management at the University
         of Luxembourg under the supervision of
-        <a href="https://scholar.google.com/citations?user=wzPj3ekAAAAJ&hl=en" target="_blank" rel="noopener">Prof. Dr. Benny Mantin</a>.
+        <a href="https://scholar.google.com/citations?user=wzPj3ekAAAAJ&amp;hl=en" target="_blank" rel="noopener">Prof. Dr. Benny Mantin</a>.
         I earned a BSc in Accounting (with a minor in CFA) from Nanjing Audit University and an MSc in
         Management Science and Engineering from Nanjing University of Finance and Economics. Before
         starting my doctorate, I gained research experience as a Research Assistant at the Nanjing
@@ -314,50 +283,76 @@
         operations and marketing, and game theory. My PhD project examines the Right to Repair
         regulation and its impacts from an operations management perspective. Feel free to explore the
         site, and if you'd like to know more about my work, check out the
-        <a href="#" onclick="switchTab('pubs'); return false;">Research</a> section here!
+        <a href="#research">Research</a> section here!
       </p>
     </section>
 
-    <!-- Publications -->
-    <section id="pubs" class="panel">
+    <!-- Research -->
+    <section id="panel-research" class="panel" aria-label="Research" hidden>
       <h2>Working Papers</h2>
       <ul class="list">
         <li>
-          J. He, B. Mantin (2025). The Right to Repair: On the Impact of Mandated Reparability Level.<br>
-          <button class="abstract-toggle" data-target="abstract-1">Abstract</button>
-          <p class="abstract-text" id="abstract-1">
-            The Right to Repair (RTR) movement advocates for legislation that requires manufacturers to
-            provide essential guides, tools and components that empower consumers to perform self-repairs.
-            To that end, governments may mandate manufacturers to comply with a certain reparability level
-            while making components available to avoid waste resulting from premature disposal of failed
-            products. Does mandating reparability promote repairs and help reduce waste? As such legislation
-            may trigger price responses by manufacturers, the answer is not clear. In this paper, we consider
-            a two-period game-theoretic model where a manufacturer determines the price of a product as well
-            as the price for repairs performed by the manufacturer (M-Repairs). Once a reparability level is
-            mandated, consumers can also self-repair failed products (S-Repairs). We find that the
-            manufacturer offers M-Repairs only when his repair cost is below a certain threshold and that
-            mandating reparability can alleviate this threshold. Further, inducing S-Repairs may require
-            mandating a high reparability level, which ultimately may also result with lower prices for the
-            product as well as for the M-Repairs. While mandating reparability generally improves consumer
-            surplus and reduces waste especially if the reparability level is high, it can potentially lead
-            to an outcome where both the manufacturer's profit and consumer surplus shrink. Extending the
-            model to include product durability as a decision variable, our numerical study reveals potential
-            increases in waste (when reparability level is low) and profit, highlighting the necessity of a
-            complementary durability regulation alongside mandated reparability levels.
-          </p>
+          J. He, B. Mantin (2025). The Right to Repair: On the Impact of Mandated Reparability Level.
+          <details class="abstract">
+            <summary><span class="when-closed">Abstract</span><span class="when-open">Hide abstract</span></summary>
+            <p>
+              The Right to Repair (RTR) movement advocates for legislation that requires manufacturers to
+              provide essential guides, tools and components that empower consumers to perform self-repairs.
+              To that end, governments may mandate manufacturers to comply with a certain reparability level
+              while making components available to avoid waste resulting from premature disposal of failed
+              products. Does mandating reparability promote repairs and help reduce waste? As such legislation
+              may trigger price responses by manufacturers, the answer is not clear. In this paper, we consider
+              a two-period game-theoretic model where a manufacturer determines the price of a product as well
+              as the price for repairs performed by the manufacturer (M-Repairs). Once a reparability level is
+              mandated, consumers can also self-repair failed products (S-Repairs). We find that the
+              manufacturer offers M-Repairs only when his repair cost is below a certain threshold and that
+              mandating reparability can alleviate this threshold. Further, inducing S-Repairs may require
+              mandating a high reparability level, which ultimately may also result in lower prices for the
+              product as well as for the M-Repairs. While mandating reparability generally improves consumer
+              surplus and reduces waste especially if the reparability level is high, it can potentially lead
+              to an outcome where both the manufacturer's profit and consumer surplus shrink. Extending the
+              model to include product durability as a decision variable, our numerical study reveals potential
+              increases in waste (when reparability level is low) and profit, highlighting the necessity of a
+              complementary durability regulation alongside mandated reparability levels.
+            </p>
+          </details>
         </li>
         <li>
-          J. He, B. Mantin, J. Veldman (2026). A Right to Spare Part: Pricing and Regulation.<br>
-          <button class="abstract-toggle" data-target="abstract-2">Abstract</button>
-          <p class="abstract-text" id="abstract-2">
-            How should manufacturers price their products and spare parts when consumers are forward-looking?
-            We develop a game-theoretic model where demand for spare parts stems from the failure (modeled as
-            a Binomial distribution) of purchased products. We show that the manufacturer may leverage the
-            demand for spare parts as an instrument to price differentiate among consumers, whereby only
-            consumers with high valuations are able to repair their failed products. This gives rise to
-            potential social welfare-improving regulatory intervention such that constraints on pricing of
-            repair parts are mandated.
-          </p>
+          J. He, B. Mantin, J. Veldman (2026). A Right to Spare Part: Pricing and Regulation.
+          <details class="abstract">
+            <summary><span class="when-closed">Abstract</span><span class="when-open">Hide abstract</span></summary>
+            <p>
+              How should manufacturers price their products and spare parts when consumers are forward-looking?
+              We develop a game-theoretic model where demand for spare parts stems from the failure (modeled as
+              a Binomial distribution) of purchased products. We show that the manufacturer may leverage the
+              demand for spare parts as an instrument to price differentiate among consumers, whereby only
+              consumers with high valuations are able to repair their failed products. This gives rise to
+              potential social welfare-improving regulatory intervention such that constraints on pricing of
+              repair parts are mandated.
+            </p>
+          </details>
+        </li>
+        <li>
+          J. He, L. Liang, B. Mantin (2026). Channel Competition under Mandated Reparability.
+          <details class="abstract">
+            <summary><span class="when-closed">Abstract</span><span class="when-open">Hide abstract</span></summary>
+            <p>
+              Manufacturers are facing increasing pressure to make repair services more convenient and
+              affordable for the products they sell. Product reparability, promoted through regulation, has
+              emerged as an instrument for independent repairers (IR) to perform repairs at a higher recovered
+              value. The mandated reparability intensifies competition in the repair market and breaks
+              manufacturers' monopoly in the repair market. This gives rise to a strategic response from
+              manufacturers: when the mandated reparability is sufficiently high, the manufacturer might
+              decrease the product price during the post product failure period, which in turn encourages
+              consumers to purchase a new product instead of repairing it. Besides, manufacturers can also
+              provide an authorized repairer service. Given a certain reparability level, should manufacturers
+              remain as competitors to compete in the repair market with independent repairers, or provide
+              authorized repair service through a collaborating mode? We develop a two-period game-theoretic
+              model in which repairs can be performed by either the manufacturer or an (authorized) independent
+              repairer (IR). We investigate the manufacturer's pricing decisions across three scenarios
+              characterized by different repair channel structures.
+            </p>
+          </details>
         </li>
       </ul>
 
@@ -384,13 +379,14 @@
           <span class="meta">LISS 2019: Proceedings of the 9th International Conference on Logistics · Cited by 2</span>
         </li>
       </ul>
-      <p style="margin-top:16px;">
-        See the full, up-to-date list on <a href="https://scholar.google.com/citations?user=mhQY0gwAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a>.
+      <p>
+        See the full, up-to-date list on
+        <a href="https://scholar.google.com/citations?user=mhQY0gwAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.
       </p>
     </section>
 
     <!-- Teaching -->
-    <section id="teaching" class="panel">
+    <section id="panel-teaching" class="panel" aria-label="Teaching" hidden>
       <ul class="list">
         <li>
           Probability and Statistical Inference (Bachelor course) — Teaching Assistant<br>
@@ -412,7 +408,7 @@
     </section>
 
     <!-- Off the Clock -->
-    <section id="offclock" class="panel">
+    <section id="panel-offclock" class="panel" aria-label="Off the Clock" hidden>
       <h2>Sky Chaser in Luxembourg</h2>
       <div class="polaroid-row" id="sky-row"></div>
 
@@ -421,109 +417,131 @@
     </section>
 
     <footer>© 2026 Junxia He</footer>
-  </div>
+  </main>
 
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">&times;</span>
-    <img id="lightbox-img" src="" alt="">
+  <dialog id="lightbox" class="lightbox" aria-label="Photo viewer">
+    <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <img id="lightbox-img" alt="">
     <p id="lightbox-caption" class="lightbox-caption"></p>
-  </div>
+  </dialog>
 
   <script>
-    const tabs = document.querySelectorAll('.tab[data-tab]');
-    const panels = document.querySelectorAll('.panel');
-    const profileHeader = document.querySelector('.profile');
+  (function () {
+    /* ---------- Section switching (URL hash, so tabs are linkable + back button works) ---------- */
+    var SECTIONS = ['about', 'research', 'teaching', 'offclock'];
+    var ALIASES = { pubs: 'research' };          // keeps any old #pubs links working
+    var navLinks = document.querySelectorAll('.tab[data-tab]');
+    var profile = document.getElementById('profile');
 
-    function switchTab(tabName) {
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      const targetTab = document.querySelector(`.tab[data-tab="${tabName}"]`);
-      if (targetTab) targetTab.classList.add('active');
-      document.getElementById(tabName).classList.add('active');
-      profileHeader.style.display = tabName === 'about' ? '' : 'none';
+    function show(name) {
+      name = ALIASES[name] || name;
+      if (SECTIONS.indexOf(name) === -1) name = 'about';
+
+      navLinks.forEach(function (a) {
+        if (a.dataset.tab === name) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      SECTIONS.forEach(function (s) {
+        document.getElementById('panel-' + s).hidden = s !== name;
+      });
+      profile.hidden = name !== 'about';
+      if (name === 'offclock') loadOffClock();
     }
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    window.addEventListener('hashchange', function () {
+      show(location.hash.slice(1));
+      window.scrollTo(0, 0);
+    });
+    show(location.hash.slice(1));
+
+    /* ---------- Dark mode (remembered across visits) ---------- */
+    var root = document.documentElement;
+    var themeBtn = document.getElementById('theme-toggle');
+    function syncThemeBtn() { themeBtn.setAttribute('aria-pressed', root.dataset.theme === 'dark'); }
+    syncThemeBtn();
+    themeBtn.addEventListener('click', function () {
+      var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      syncThemeBtn();
+      try { localStorage.setItem('theme', next); } catch (e) {}
     });
 
-    const themeBtn = document.getElementById('theme-toggle');
-    themeBtn.addEventListener('click', () => {
-      const html = document.documentElement;
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    });
-
-    document.querySelectorAll('.abstract-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.getElementById(btn.dataset.target);
-        target.classList.toggle('open');
-        btn.textContent = target.classList.contains('open') ? 'Hide abstract' : 'Abstract';
-      });
-    });
+    /* ---------- Lightbox ---------- */
+    var lightbox = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightbox-img');
+    var lbCap = document.getElementById('lightbox-caption');
 
     function openLightbox(src, caption) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox-caption').textContent = caption;
-      document.getElementById('lightbox').classList.add('open');
+      lbImg.src = src;
+      lbImg.alt = caption || 'Photo';
+      lbCap.textContent = caption || '';
+      lightbox.showModal();
     }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-    }
+    lightbox.addEventListener('click', function () { lightbox.close(); });
 
-    const EXT_TRIES = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
+    /* ---------- Off the Clock gallery (loaded only when the tab is first opened) ---------- */
+    var ANGLES = [-4, 3, -2, 3, -3, 2, -3, 4, -2];
+    var EXTS = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
+    var offClockLoaded = false;
 
-    function stripExt(name) {
-      return name.replace(/\.(jpe?g|png)$/i, '');
-    }
-
-    function imgWithFallback(base, caption) {
-      const alt = (caption || 'Photo').replace(/"/g, '&quot;');
-      const tries = JSON.stringify(EXT_TRIES.map(ext => `${base}.${ext}`));
-      return `<img src="${base}.${EXT_TRIES[0]}" alt="${alt}"
-        data-tries='${tries}' data-idx="0"
-        onerror="tryNextExt(this)">`;
+    // Try the file name exactly as written in the JSON first, then other extensions.
+    function candidates(file) {
+      var m = file.match(/^(.*)\.(jpe?g|png)$/i);
+      var base = m ? m[1] : file;
+      var list = EXTS.map(function (e) { return base + '.' + e; });
+      return m ? [file].concat(list.filter(function (f) { return f !== file; })) : list;
     }
 
-    function tryNextExt(img) {
-      const tries = JSON.parse(img.getAttribute('data-tries'));
-      let idx = parseInt(img.getAttribute('data-idx'), 10) + 1;
-      if (idx < tries.length) {
-        img.setAttribute('data-idx', idx);
-        img.src = tries[idx];
-      } else {
-        img.onerror = null;
-        img.style.display = 'none';
-      }
+    function makePolaroid(photo, i) {
+      var caption = photo.caption || '';
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'polaroid';
+      card.style.setProperty('--r', ANGLES[i % ANGLES.length] + 'deg');
+
+      var img = document.createElement('img');
+      img.alt = caption || 'Photo';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      var srcs = candidates(photo.file), k = 0;
+      img.addEventListener('error', function () {
+        if (++k < srcs.length) img.src = srcs[k];
+        else card.remove();                       // no working image: drop the card
+      });
+      img.src = srcs[0];
+
+      var cap = document.createElement('span');
+      cap.className = 'polaroid-caption';
+      cap.textContent = caption;                  // textContent: safe with quotes / special chars
+
+      card.append(img, cap);
+      card.addEventListener('click', function () { openLightbox(img.currentSrc || img.src, caption); });
+      return card;
     }
 
     function renderPolaroids(photos, containerId) {
-      const container = document.getElementById(containerId);
-      if (!container || !photos) return;
-      const angles = [-4, 3, -2, 3, -3, 2, -3, 4, -2];
-      container.innerHTML = photos.map((photo, i) => {
-        const base = stripExt(photo.file);
-        const caption = photo.caption || '';
-        const angle = angles[i % angles.length];
-        const safeCaption = caption.replace(/'/g, "\\'");
-        return `
-          <div class="polaroid" style="transform: rotate(${angle}deg);"
-               onclick="openLightbox(document.querySelector('#${containerId} .polaroid:nth-child(${i + 1}) img').src, '${safeCaption}')">
-            ${imgWithFallback(base, caption)}
-            <p class="polaroid-caption">${caption}</p>
-          </div>`;
-      }).join('');
+      var container = document.getElementById(containerId);
+      if (!container || !Array.isArray(photos)) return;
+      var frag = document.createDocumentFragment();
+      photos.forEach(function (p, i) { if (p && p.file) frag.appendChild(makePolaroid(p, i)); });
+      container.replaceChildren(frag);
     }
 
-    fetch('off-the-clock.json')
-      .then(res => res.json())
-      .then(data => {
-        renderPolaroids(data.sky, 'sky-row');
-        renderPolaroids(data.explore, 'explore-row');
-      })
-      .catch(err => {
-        console.log('Could not load off-the-clock.json', err);
-      });
+    function loadOffClock() {
+      if (offClockLoaded) return;
+      offClockLoaded = true;
+      fetch('off-the-clock.json')
+        .then(function (res) { if (!res.ok) throw new Error(res.status); return res.json(); })
+        .then(function (data) {
+          renderPolaroids(data.sky, 'sky-row');
+          renderPolaroids(data.explore, 'explore-row');
+        })
+        .catch(function (err) {
+          offClockLoaded = false;                 // allow a retry next time the tab opens
+          console.warn('Could not load off-the-clock.json', err);
+        });
+    }
+  })();
   </script>
 </body>
 </html>
